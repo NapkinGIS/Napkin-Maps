@@ -61,7 +61,7 @@ L.Map.addInitHook(function() {
   );
 
 
-  // Adds print-map button
+  // Print-map
   this.addControl(
     L.easyPrint({
       title: "Print map to image file",
@@ -71,6 +71,70 @@ L.Map.addInitHook(function() {
       exportOnly: true,
       hideControlContainer: false,
       hidden: false
+    })
+  );
+
+
+  // Distance/Reachability
+  this.addControl(
+    L.control.reachability({
+      apiKey: "5b3ce3597851110001cf62486819d8e94f6d4757821d860ffc76843f",
+      position: "topleft",
+      styleFn: feature => {
+        return {
+          color: "#0073d4",
+          opacity: 0.5,
+          fillOpacity: 0.2
+        };
+      },
+      clickFn: ev => {
+        let layer = ev.target;
+
+        let props = layer.feature.properties;
+        let popupContent = `
+          <b>Mode of travel</b>: ${props['Travel mode']} <br />
+          <b>Range</b>: 0 - ${props['Range']} ${props['Range units']} <br />
+          <b>Area</b>: ${props['Area']} ${props['Area units'].replace(/\^2/ig, "<sup>2</sup>")} <br />
+          <b>Population</b>: ${props['Population']}
+        `;
+
+        if(props.hasOwnProperty('Reach factor'))
+          popupContent += `
+            <br />
+            <b>Reach factor</b>: ${props['Reach factor']}
+          `;
+
+        layer.bindPopup(popupContent).openPopup();
+      },
+      markerFn: (latLng, travelMode, rangeType) => {
+        return L.circleMarker(latLng, {
+          radius: 4,
+          weight: 2,
+          color: "#0073d4",
+          fillColor: "#fff",
+          fillOpacity: 1
+        });
+      },
+      //expandButtonContent: "",
+      //expandButtonStyleClass: "reachability-control-expand-button fa fa-bullseye",
+      collapseButtonContent: "",
+      collapseButtonStyleClass: "reachability-control-collapse-button fas fa-caret-up",
+      drawButtonContent: "",
+      drawButtonStyleClass: "fas fa-pen",
+      deleteButtonContent: "",
+      deleteButtonStyleClass: "fas fa-trash",
+      distanceButtonContent: "",
+      distanceButtonStyleClass: "fas fa-road",
+      timeButtonContent: "",
+      timeButtonStyleClass: "fas fa-clock",
+      travelModeButton1Content: "",
+      travelModeButton1StyleClass: "fas fa-car",
+      travelModeButton2Content: "",
+      travelModeButton2StyleClass: "fas fa-bicycle",
+      travelModeButton3Content: "",
+      travelModeButton3StyleClass: "fas fa-male",
+      travelModeButton4Content: "",
+      travelModeButton4StyleClass: "fas fa-wheelchair"
     })
   );
 
@@ -193,7 +257,7 @@ L.Map.addInitHook(function() {
 
 
 
-  // Adds draw control
+  // Draw control
   this.drawControl = new L.Control.Draw({
     position: "bottomleft",
     edit: {
