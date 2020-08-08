@@ -29,7 +29,6 @@ L.Map.addInitHook(function() {
       style: "bar",
       showMarker: false,
       showPopup: false,
-      autoComplete: false,
       autoClose: true
       //position: "topleft"
     })
