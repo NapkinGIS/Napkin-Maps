@@ -21,7 +21,15 @@
 "use strict";
 
 window.addEventListener("load", function() {
+  //feather.replace();
 
-  console.log("loaded");
+
+  let map = new L.Map("map", {
+    center: [60, 8],
+    zoomControl: false,
+    zoom: 5,
+    maxZoom: 18
+    //crs: "EPSG3857"
+  });
 
 });

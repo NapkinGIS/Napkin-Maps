@@ -14,22 +14,12 @@
 * GNU Affero General Public License for more details.                          *
 *                                                                              *
 * You should have received a copy of the GNU Affero General Public License     *
-* along with this program.  If not, see <http://www.gnu.org/licenses/>.        *
+* along with this program. If not, see <http://www.gnu.org/licenses/>.         *
 *                                                                              *
 *****************************************************************************©*/
 
-@charset "UTF-8";
+"use strict";
 
-html, body {
-  /**/
-}
-
-body {
-  margin: 0;
-  padding: 0;
-}
-
-#map {
-  width: 100vw;
-  height: 100vh;
+function uuid(a) {
+  return a ? (a^Math.random()*16>>a/4).toString(16) : ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, uuid);
 }

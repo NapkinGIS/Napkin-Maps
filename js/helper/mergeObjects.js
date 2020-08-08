@@ -14,22 +14,12 @@
 * GNU Affero General Public License for more details.                          *
 *                                                                              *
 * You should have received a copy of the GNU Affero General Public License     *
-* along with this program.  If not, see <http://www.gnu.org/licenses/>.        *
+* along with this program. If not, see <http://www.gnu.org/licenses/>.         *
 *                                                                              *
 *****************************************************************************©*/
 
-@charset "UTF-8";
+"use strict";
 
-html, body {
-  /**/
-}
-
-body {
-  margin: 0;
-  padding: 0;
-}
-
-#map {
-  width: 100vw;
-  height: 100vh;
+function mergeObjects(o, u) {
+  return Object.assign({}, o, u);
 }

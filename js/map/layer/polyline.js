@@ -14,22 +14,19 @@
 * GNU Affero General Public License for more details.                          *
 *                                                                              *
 * You should have received a copy of the GNU Affero General Public License     *
-* along with this program.  If not, see <http://www.gnu.org/licenses/>.        *
+* along with this program. If not, see <http://www.gnu.org/licenses/>.         *
 *                                                                              *
 *****************************************************************************©*/
 
-@charset "UTF-8";
+"use strict";
 
-html, body {
-  /**/
-}
-
-body {
-  margin: 0;
-  padding: 0;
-}
-
-#map {
-  width: 100vw;
-  height: 100vh;
-}
+L.Polyline.include({
+  length: function() {
+    var latlngs = this.getLatLngs();
+    var length = 0;
+    for (var i = 0, n = latlngs.length - 1; i< n; i++) {
+      length += latlngs[i].distanceTo(latlngs[i+1]);
+    }
+    return length;
+  }
+});
