@@ -184,21 +184,21 @@ L.Map.addInitHook(function() {
                     {
                       id: uuid(),
                       name: "OpenStreetMap",
-                      attribution: "&copy; <a href=\"http://openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors | &copy; <a href=\"https://napkingis.no/\" target=\"_blank\">Napkin AS</a>"
+                      attribution: "&copy; <a href=\"http://openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors | &copy; <a href=\"https://github.com/NapkinGIS/Napkin-Maps/blob/master/LICENCE\" target=\"_blank\">Napkin AS</a>"
                     }));
 
   this.basemaps.push(L.tileLayer("https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
                     {
                       id: uuid(),
                       name: "Google - Hybrid",
-                      attribution: "&copy; <a href=\"https://www.google.com/\" target=\"_blank\">Google</a> contributors | &copy; <a href=\"https://napkingis.no/\" target=\"_blank\">Napkin AS</a>"
+                      attribution: "&copy; <a href=\"https://www.google.com/\" target=\"_blank\">Google</a> contributors | &copy; <a href=\"https://github.com/NapkinGIS/Napkin-Maps/blob/master/LICENCE\" target=\"_blank\">Napkin AS</a>"
                     }));
 
   /*this.basemaps.push(L.tileLayer("https://www.google.com/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}",
                     {
                       id: uuid(),
                       name: "Google - Satellite",
-                      attribution: "&copy; <a href=\"https://www.google.com/\" target=\"_blank\">Google</a> contributors | &copy; <a href=\"https://napkingis.no/\" target=\"_blank\">Napkin AS</a>"
+                      attribution: "&copy; <a href=\"https://www.google.com/\" target=\"_blank\">Google</a> contributors | &copy; <a href=\"https://github.com/NapkinGIS/Napkin-Maps/blob/master/LICENCE\" target=\"_blank\">Napkin AS</a>"
                     }));*/
 
   this.basemaps[0].addTo(this);
