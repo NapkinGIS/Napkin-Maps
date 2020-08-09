@@ -60,6 +60,43 @@ L.Map.addInitHook(function() {
   );
 
 
+  // Street-View control
+  $("#streetviewContainer #back").click(function(ev) {
+    $("#streetviewContainer").css("visibility", "hidden");
+  });
+
+  let streetviewEnable = ev => {
+    //L.DomEvent.stopPropagation(ev);
+
+    let latlng = ev.latlng;
+    let lat = latlng.lat,
+        lng = latlng.lng;
+
+    let panorama = new google.maps.StreetViewPanorama(
+      document.querySelector("#streetview"),
+      {
+        position: { lat: lat, lng: lng },
+        addressControlOptions: {
+          position: google.maps.ControlPosition.TOP_RIGHT
+        },
+        linksControl: false,
+        panControl: false,
+        enableCloseButton: false,
+        fullscreenControl: false,
+        zoomControl: false
+      }
+    );
+
+    $("#streetviewContainer").css("visibility", "visible");
+  };
+
+  this.addControl(
+    L.easyButton("fa-male", function(btn, map) {
+      map.once("click", streetviewEnable);
+    }, "Street-View", "streetviewStart")
+  );
+
+
   // Print-map
   this.addControl(
     L.easyPrint({
@@ -131,7 +168,7 @@ L.Map.addInitHook(function() {
       travelModeButton2Content: "",
       travelModeButton2StyleClass: "fas fa-bicycle",
       travelModeButton3Content: "",
-      travelModeButton3StyleClass: "fas fa-male",
+      travelModeButton3StyleClass: "fas fa-walking",
       travelModeButton4Content: "",
       travelModeButton4StyleClass: "fas fa-wheelchair"
     })

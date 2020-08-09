@@ -41,6 +41,10 @@
 	<script type="text/javascript" src="lib/leaflet/leaflet.js"></script>
 	<link rel="stylesheet" href="lib/leaflet/leaflet.css" />
 
+	<!-- leaflet.easybutton import -->
+	<script type="text/javascript" src="lib/leaflet.easybutton/leaflet.easybutton.js"></script>
+	<link rel="stylesheet" href="lib/leaflet.easybutton/leaflet.easybutton.css" />
+
 	<!-- leaflet.coordinates import -->
 	<script type="text/javascript" src="lib/leaflet.coordinates/leaflet.coordinates.js"></script>
 	<link rel="stylesheet" href="lib/leaflet.coordinates/leaflet.coordinates.css" />
@@ -78,6 +82,19 @@
 	<link rel="stylesheet" href="lib/leaflet.draw/leaflet.draw.css" />
 
 
+	<!-- google maps import -->
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOhUleCCqG94Kujoff1yFCWbpDj1of4PI&callback=initMap&libraries=&v=weekly"
+		defer
+	></script>
+	<script type="text/javascript">
+		"use strict";
+
+		function initMap() { console.log("-"); }
+	</script>
+
+
 	<!-- custom styles -->
   <link rel="stylesheet" href="css/main.css" />
 
@@ -89,6 +106,11 @@
 <body>
 
   <div id="map"></div>
+
+	<div id="streetviewContainer">
+		<i class="fas fa-angle-left" id="back"></i>
+		<div id="streetview"></div>
+	</div>
 
 	<script type="text/javascript" src="lib/jquery/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript" src="lib/feather/feather.min.js"></script>
