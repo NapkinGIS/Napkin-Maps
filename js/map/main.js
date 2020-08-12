@@ -63,10 +63,12 @@ L.Map.addInitHook(function() {
   // Street-View control
   $("#streetviewContainer #back").click(function(ev) {
     $("#streetviewContainer").css("visibility", "hidden");
+    $("#streetviewContainer #not_found").css("visibility", "hidden");
   });
 
   let streetviewEnable = ev => {
     //L.DomEvent.stopPropagation(ev);
+    streetviewBtn.state("streetviewStart");
 
     let latlng = ev.latlng;
     let lat = latlng.lat,
@@ -87,26 +89,48 @@ L.Map.addInitHook(function() {
       }
     );
 
-    $("#streetviewContainer").css("visibility", "visible");
+    panorama.H.then(() => {
+      setTimeout(() => {
+
+        if(panorama.getStatus() == "ZERO_RESULTS")
+          $("#streetviewContainer #not_found").css("visibility", "visible");
+
+        $("#streetviewContainer").css("visibility", "visible");
+
+      }, 500);
+    });
   };
 
-  this.addControl(
-    L.easyButton("fa-male", function(btn, map) {
-      map.once("click", streetviewEnable);
-    }, "Street-View", "streetviewStart")
-  );
+  let streetviewBtn = L.easyButton({
+    states: [
+      {
+        stateName: "streetviewStart",
+        icon: "fa-male",
+        title: "Street-View",
+        onClick: control => {
+          control.state("streetviewCancel");
+          this.once("click", streetviewEnable);
+        }
+      },
+      {
+        stateName: "streetviewCancel",
+        icon: "fa-times",
+        title: "Cancel street-View",
+        onClick: control => {
+          this.off("click", streetviewEnable);
+          control.state("streetviewStart");
+        }
+      }
+    ]
+  });
+  this.addControl( streetviewBtn );
 
 
-  // Print-map
+  // Geoposition button (GPS tracking)
   this.addControl(
-    L.easyPrint({
-      title: "Print map to image file",
+    L.control.locate({
       position: "topleft",
-      sizeModes: ["A4Landscape", "A4Portrait"],
-      filename: "Napkin-Maps",
-      exportOnly: true,
-      hideControlContainer: false,
-      hidden: false
+      icon: "fa fa-crosshairs"
     })
   );
 
@@ -175,11 +199,16 @@ L.Map.addInitHook(function() {
   );
 
 
-  // Geoposition button (GPS tracking)
+  // Print-map
   this.addControl(
-    L.control.locate({
+    L.easyPrint({
+      title: "Print map to image file",
       position: "topleft",
-      icon: "fa fa-crosshairs"
+      sizeModes: ["A4Landscape", "A4Portrait"],
+      filename: "Napkin-Maps",
+      exportOnly: true,
+      hideControlContainer: false,
+      hidden: false
     })
   );
 

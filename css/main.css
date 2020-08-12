@@ -56,7 +56,7 @@ body {
 }
 
 #streetviewContainer #back {
-  z-index: 2;
+  z-index: 3;
 
   position: absolute;
   top: 10px;
@@ -84,4 +84,28 @@ body {
   width: 100vw;
   min-height: 100vh;
   min-height: -webkit-fill-available;
+}
+
+#streetviewContainer #not_found {
+  z-index: 2;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+
+  background-color: rgba(0, 0, 0, 0.8);
+  text-align: center;
+
+  visibility: hidden;
+}
+#streetviewContainer #not_found>p {
+  margin-top: 150px;
+
+  color: white;
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-size: 20px;
 }
