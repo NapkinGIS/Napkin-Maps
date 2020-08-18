@@ -287,8 +287,9 @@ L.Map.addInitHook(function() {
   this.layers = [];
 
   let drawingLayer = L.featureGroup();
-  //this.markercluster = L.markerClusterGroup();
-  //drawingLayer.addLayer(this.markercluster);
+
+  this.markercluster = L.markerClusterGroup();
+  //this.addLayer(this.markercluster);
 
   this.layers.push(drawingLayer);
   this.layers[0].addTo(this);
