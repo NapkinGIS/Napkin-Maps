@@ -52,6 +52,42 @@ L.Map.addInitHook(function() {
   );
 
 
+  // Directions
+  this.addControl(
+    L.Routing.control({
+      //waypoints: [],
+      geocoder: L.Control.Geocoder.nominatim(),
+      routeWhileDragging: false,
+      showAlternatives: true,
+      collapsible: true,
+      show: false
+    })
+  );
+
+
+  // Geoposition button (GPS tracking)
+  this.addControl(
+    L.control.locate({
+      position: "topleft",
+      icon: "fa fa-crosshairs"
+    })
+  );
+
+
+  // Print-map
+  this.addControl(
+    L.easyPrint({
+      title: "Print map to image file",
+      position: "topleft",
+      sizeModes: ["A4Landscape", "A4Portrait"],
+      filename: "Napkin-Maps",
+      exportOnly: true,
+      hideControlContainer: false,
+      hidden: false
+    })
+  );
+
+
   // Street-View control
   $("#streetviewContainer #back").click(function(ev) {
     $("#streetviewContainer").css("visibility", "hidden");
@@ -116,29 +152,6 @@ L.Map.addInitHook(function() {
     ]
   });
   this.addControl( streetviewBtn );
-
-
-  // Geoposition button (GPS tracking)
-  this.addControl(
-    L.control.locate({
-      position: "topleft",
-      icon: "fa fa-crosshairs"
-    })
-  );
-
-
-  // Print-map
-  this.addControl(
-    L.easyPrint({
-      title: "Print map to image file",
-      position: "topleft",
-      sizeModes: ["A4Landscape", "A4Portrait"],
-      filename: "Napkin-Maps",
-      exportOnly: true,
-      hideControlContainer: false,
-      hidden: false
-    })
-  );
 
 
   // Curcor coordinates
@@ -228,8 +241,8 @@ L.Map.addInitHook(function() {
 
     this.layers[0].addLayer(object);
 
-    if(type == "marker") markercluster.addLayer(object);
-    else this.layers[0].addLayer(object);
+    //if(type == "marker") markercluster.addLayer(object);
+    //else this.layers[0].addLayer(object);
   });
 
   this.on("draw:edited", ev => {
@@ -272,7 +285,13 @@ L.Map.addInitHook(function() {
           editing: { className: "" }
         }
       },
-      circle: false,
+      circle: {
+        shapeOptions: {
+          color: "#ff9900",
+          fillColor: "#ff9900",
+          editing: { className: "" }
+        }
+      },
       rectangle: false,
       circlemarker: false
     }
@@ -323,7 +342,6 @@ L.Map.addInitHook(function() {
 
     console.log(lat, lng);
   });
-
 
 });
 
