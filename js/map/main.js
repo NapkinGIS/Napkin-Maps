@@ -44,14 +44,6 @@ L.Map.addInitHook(function() {
   );
 
 
-  // Fullscreen button
-  this.addControl(
-    new L.Control.Fullscreen({
-      position: "topright"
-    })
-  );
-
-
   // Zoom control
   this.addControl(
     L.control.zoom({
@@ -131,70 +123,6 @@ L.Map.addInitHook(function() {
     L.control.locate({
       position: "topleft",
       icon: "fa fa-crosshairs"
-    })
-  );
-
-
-  // Distance/Reachability
-  this.addControl(
-    L.control.reachability({
-      apiKey: "5b3ce3597851110001cf62486819d8e94f6d4757821d860ffc76843f",
-      position: "topleft",
-      styleFn: feature => {
-        return {
-          color: "#0073d4",
-          opacity: 0.5,
-          fillOpacity: 0.2
-        };
-      },
-      clickFn: ev => {
-        let layer = ev.target;
-
-        let props = layer.feature.properties;
-        let popupContent = `
-          <b>Mode of travel</b>: ${props['Travel mode']} <br />
-          <b>Range</b>: 0 - ${props['Range']} ${props['Range units']} <br />
-          <b>Area</b>: ${props['Area']} ${props['Area units'].replace(/\^2/ig, "<sup>2</sup>")} <br />
-          <b>Population</b>: ${props['Population']}
-        `;
-
-        if(props.hasOwnProperty('Reach factor'))
-          popupContent += `
-            <br />
-            <b>Reach factor</b>: ${props['Reach factor']}
-          `;
-
-        layer.bindPopup(popupContent).openPopup();
-      },
-      markerFn: (latLng, travelMode, rangeType) => {
-        return L.circleMarker(latLng, {
-          radius: 4,
-          weight: 2,
-          color: "#0073d4",
-          fillColor: "#fff",
-          fillOpacity: 1
-        });
-      },
-      //expandButtonContent: "",
-      //expandButtonStyleClass: "reachability-control-expand-button fa fa-bullseye",
-      collapseButtonContent: "",
-      collapseButtonStyleClass: "reachability-control-collapse-button fas fa-caret-up",
-      drawButtonContent: "",
-      drawButtonStyleClass: "fas fa-pen",
-      deleteButtonContent: "",
-      deleteButtonStyleClass: "fas fa-trash",
-      distanceButtonContent: "",
-      distanceButtonStyleClass: "fas fa-road",
-      timeButtonContent: "",
-      timeButtonStyleClass: "fas fa-clock",
-      travelModeButton1Content: "",
-      travelModeButton1StyleClass: "fas fa-car",
-      travelModeButton2Content: "",
-      travelModeButton2StyleClass: "fas fa-bicycle",
-      travelModeButton3Content: "",
-      travelModeButton3StyleClass: "fas fa-walking",
-      travelModeButton4Content: "",
-      travelModeButton4StyleClass: "fas fa-wheelchair"
     })
   );
 
@@ -288,24 +216,24 @@ L.Map.addInitHook(function() {
 
   let drawingLayer = L.featureGroup();
 
-  this.markercluster = L.markerClusterGroup();
-  //this.addLayer(this.markercluster);
+  let markercluster = L.markerClusterGroup();
+  //this.addLayer(markercluster);
 
   this.layers.push(drawingLayer);
   this.layers[0].addTo(this);
 
-  this.on("draw:created", ev => { // Initializing drawing events
+  this.on("draw:created", ev => {
     let object = ev.layer,
         type = ev.layerType;
 
     this.layers[0].addLayer(object);
 
-    /*if(type == "marker") this.markercluster.addLayer(object);
-    else this.layers[0].addLayer(object);*/
+    if(type == "marker") markercluster.addLayer(object);
+    else this.layers[0].addLayer(object);
   });
 
-  this.on("draw:edited", ev => { // Initializing editing events
-    //let layers = ev.layers;
+  this.on("draw:edited", ev => {
+    let layers = ev.layers;
   });
 
 
@@ -344,25 +272,9 @@ L.Map.addInitHook(function() {
           editing: { className: "" }
         }
       },
-      circle: {
-        shapeOptions: {
-          color: "#ff9900",
-          fillColor: "#ff9900",
-          editing: { className: "" }
-        }
-      },
-      rectangle: {
-        shapeOptions: {
-          color: "#ff9900",
-          fillColor: "#ff9900",
-          editing: { className: "" }
-        }
-      },
-      circlemarker: {
-        shapeOptions: {
-          editing: { className: "" }
-        }
-      }
+      circle: false,
+      rectangle: false,
+      circlemarker: false
     }
   });
   this.addControl(this.drawControl);
