@@ -55,8 +55,9 @@ L.Map.addInitHook(function() {
   // Directions
   this.addControl(
     L.Routing.control({
-      //waypoints: [],
       geocoder: L.Control.Geocoder.nominatim(),
+      //waypoints: [],
+      //addWaypoints: false,
       routeWhileDragging: false,
       showAlternatives: true,
       collapsible: true,
