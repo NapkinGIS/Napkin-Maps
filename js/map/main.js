@@ -188,18 +188,18 @@ L.Map.addInitHook(function() {
 
   this.basemaps = [];
 
-  this.basemaps.push(L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                    {
-                      id: uuid(),
-                      name: "OpenStreetMap",
-                      attribution: "&copy; <a href=\"http://openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors | &copy; <a href=\"https://github.com/NapkinGIS/Napkin-Maps/blob/master/LICENCE\" target=\"_blank\">Napkin AS</a>"
-                    }));
-
   this.basemaps.push(L.tileLayer("https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
                     {
                       id: uuid(),
                       name: "Google - Hybrid",
                       attribution: "&copy; <a href=\"https://www.google.com/\" target=\"_blank\">Google</a> contributors | &copy; <a href=\"https://github.com/NapkinGIS/Napkin-Maps/blob/master/LICENCE\" target=\"_blank\">Napkin AS</a>"
+                    }));
+
+  this.basemaps.push(L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                    {
+                      id: uuid(),
+                      name: "OpenStreetMap",
+                      attribution: "&copy; <a href=\"http://openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors | &copy; <a href=\"https://github.com/NapkinGIS/Napkin-Maps/blob/master/LICENCE\" target=\"_blank\">Napkin AS</a>"
                     }));
 
   /*this.basemaps.push(L.tileLayer("https://www.google.com/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}",
@@ -310,8 +310,8 @@ L.Map.addInitHook(function() {
 
 
   let underlay = {
-    "OpenStreetMap": this.basemaps[0],
-    "Google": this.basemaps[1]
+    "Google": this.basemaps[0],
+    "OpenStreetMap": this.basemaps[1]
   };
 
   let overlay = {
