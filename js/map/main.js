@@ -188,7 +188,7 @@ L.Map.addInitHook(function() {
 
   this.basemaps = [];
 
-  this.basemaps.push(L.tileLayer("https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
+  this.basemaps.push(L.tileLayer("https://mt1.google.com/vt?lyrs=y&x={x}&y={y}&z={z}",
                     {
                       id: uuid(),
                       name: "Google - Hybrid",
