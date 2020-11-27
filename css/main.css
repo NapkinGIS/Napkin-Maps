@@ -112,28 +112,5 @@ body {
 
 
 .leaflet-bottom.leaflet-left {
-  z-index: 999;
-}
-
-a.leaflet-bar-part.leaflet-bar-part-single,
-a#leafletEasyPrint,
-.easy-button-button,
-.leaflet-control-coordinates,
-.leaflet-control-geosearch>form,
-.leaflet-routing-container,
-.leaflet-control-layers {
-  border-radius: 1px !important;
-}
-
-a.leaflet-draw-draw-polyline,
-a.leaflet-draw-edit-edit,
-a.leaflet-control-zoom-in {
-  border-top-left-radius: 1px !important;
-  border-top-right-radius: 1px !important;
-}
-a.leaflet-draw-draw-circle,
-a.leaflet-draw-edit-remove,
-a.leaflet-control-zoom-out {
-  border-bottom-left-radius: 1px !important;
-  border-bottom-right-radius: 1px !important;
+  /*z-index: 999;*/
 }
