@@ -27,7 +27,7 @@ L.Map.addInitHook(function() {
 		new GeoSearch.SearchControl({
 			provider: new GeoSearch.OpenStreetMapProvider(),
 			style: "bar",
-			showMarker: false,
+			showMarker: true,
 			showPopup: false,
 			autoClose: true
 		})
