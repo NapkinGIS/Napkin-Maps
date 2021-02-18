@@ -77,7 +77,7 @@ L.Map.addInitHook(function() {
 
 		let latlng = ev.latlng;
 		let lat = latlng.lat,
-				lng = latlng.lng;
+			lng = latlng.lng;
 
 		let panorama = new google.maps.StreetViewPanorama(
 			document.querySelector("#streetview"),
@@ -213,7 +213,83 @@ L.Map.addInitHook(function() {
 	this.layers = [];
 
 	let markercluster = L.markerClusterGroup();
-  //this.addLayer(markercluster);
+	//this.addLayer(markercluster);
+
+	/*let drawingLayer = L.featureGroup(),
+		objectLayer = L.featureGroup();
+
+	this.layers.push(drawingLayer);
+	this.layers[0].addTo(this);
+
+	this.layers.push(objectLayer);
+	this.layers[1].addTo(this);
+
+	this.on("draw:created", ev => {
+		let object = ev.layer,
+			type = ev.layerType;
+
+		this.layers[0].addLayer(object);
+
+		//if(type == "marker") this.markercluster.addLayer(object);
+		//else this.layers[0].addLayer(object);
+	});
+
+	this.on("draw:edited", ev => {});*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	// Draw control
+	/*this.drawControl = new L.Control.Draw({
+		position: "topleft",
+		edit: {
+			featureGroup: this.layers[0]
+		},
+		draw: {
+			marker: false,
+			polyline: {
+				shapeOptions: {
+					color: "#ff9900",
+					editing: { className: "" }
+				}
+			},
+			polygon: {
+				shapeOptions: {
+					color: "#ff9900",
+					fillColor: "#ff9900",
+					editing: { className: "" }
+				}
+			},
+			circle: {
+				shapeOptions: {
+					color: "#ff9900",
+					fillColor: "#ff9900",
+					editing: { className: "" }
+				}
+			},
+			rectangle: {
+				shapeOptions: {
+					color: "#ff9900",
+					fillColor: "#ff9900",
+					editing: { className: "" }
+				}
+			},
+			circlemarker: false
+		}
+	});
+	this.addControl(this.drawControl);*/
 
 
 
@@ -250,7 +326,7 @@ L.Map.addInitHook(function() {
 
 		let latlng = ev.latlng;
 		let lat = latlng.lat,
-				lng = latlng.lng;
+			lng = latlng.lng;
 
 		console.log(lat, lng);
 	});
@@ -273,5 +349,39 @@ L.Map.include({
 	importData: function(data) {
 		//
 	}
+
+	/*addressToLatLng: async function(address) {
+		if(!address) return;
+
+		let key = 'AIzaSyBOhUleCCqG94Kujoff1yFCWbpDj1of4PI';
+		let url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${key}`;
+
+		let res = await fetch(url)
+		let data = await res.json();
+
+		if(data.results.length <= 0) {
+			console.error("No position found for the address");
+			return;
+		}
+
+		return data.results[0].geometry.location;
+	},
+
+	panToAddress: async function(address, zoom) {
+		let latlng = await this.addressToLatLng(address);
+		if(!latlng) return;
+
+		if(!zoom) zoom = 15;
+		this.setView(latlng, zoom);
+	},
+
+	drawPoint: async function(address, options) {
+		let latlng = await this.addressToLatLng(address);
+		if(!latlng) return;
+
+		if(typeof options !== 'object' || options === null) return;
+
+		this.layers[1].addLayer( L.circleMarker(latlng), options || {} );
+	}*/
 
 });
