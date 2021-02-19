@@ -375,7 +375,7 @@ L.Map.include({
 		this.setView(latlng, zoom);
 	},
 
-	drawPoint: async function(address, color, radius) {
+	drawPoint: async function(address, radius, color) {
 		let latlng = await this.addressToLatLng(address);
 		if(!latlng) return;
 
