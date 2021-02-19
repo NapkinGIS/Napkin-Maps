@@ -375,13 +375,17 @@ L.Map.include({
 		this.setView(latlng, zoom);
 	},
 
-	drawPoint: async function(address, options) {
+	drawPoint: async function(address, color, radius) {
 		let latlng = await this.addressToLatLng(address);
 		if(!latlng) return;
 
-		if(typeof options !== 'object' || options === null) return;
-
-		this.layers[1].addLayer( L.circleMarker(latlng), options || {} );
+		this.layers[1].addLayer(
+			L.circleMarker(latlng),
+			{
+				radius: radius || 8,
+				color: color || '#3388ff'
+			}
+		);
 	}*/
 
 });
