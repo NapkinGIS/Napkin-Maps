@@ -356,7 +356,7 @@ L.Map.include({
 		let key = 'AIzaSyBOhUleCCqG94Kujoff1yFCWbpDj1of4PI';
 		let url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${key}`;
 
-		let res = await fetch(url)
+		let res = await fetch(url);
 		let data = await res.json();
 
 		if(data.results.length <= 0) {
@@ -375,17 +375,12 @@ L.Map.include({
 		this.setView(latlng, zoom);
 	},
 
-	drawPoint: async function(address, radius, color) {
+	drawPoint: async function(address, color, radius) {
 		let latlng = await this.addressToLatLng(address);
 		if(!latlng) return;
 
-		this.layers[1].addLayer(
-			L.circleMarker(latlng),
-			{
-				radius: radius || 8,
-				color: color || '#3388ff'
-			}
-		);
+		let marker = L.circleMarker(latlng, { radius: radius || 8 }).addTo(this.layers[1]);
+		marker.setStyle({ color: color || '#3388ff' });
 	}*/
 
 });
