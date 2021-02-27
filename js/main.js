@@ -25,7 +25,7 @@ window.addEventListener("load", function() {
 
 
   let map = new L.Map("map", {
-    center: [60, 8],
+    center: [ 63.52897, 10.4589 ],
     zoomControl: false,
     zoom: 5,
     maxZoom: 18

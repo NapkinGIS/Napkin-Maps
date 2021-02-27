@@ -42,18 +42,28 @@ L.Map.addInitHook(function() {
 
 
 	// Directions
-	this.addControl(
-		L.Routing.control({
-			geocoder: L.Control.Geocoder.nominatim(),
-			//waypoints: [],
-			//addWaypoints: false,
-			routeWhileDragging: false,
-			showAlternatives: true,
-			collapsible: true,
-			show: false,
-			position: "topright"
-		})
-	);
+	let router = L.Routing.control({
+		geocoder: L.Control.Geocoder.nominatim(),
+		//waypoints: [],
+		//addWaypoints: false,
+		extendToWaypoints: false,
+		draggableWaypoints: false,
+		routeWhileDragging: false,
+		showAlternatives: true,
+		collapsible: true,
+		show: false,
+		position: "topright"
+	});
+
+	router.on('routeselected', ev => {
+		let route = ev.route;
+		let coord = route.coordinates;
+	});
+
+	router.on('routingstart', () => $("body").css("cursor", "progress"));
+	router.on('routesfound routingerror', () => $("body").css("cursor", "default"));
+
+	this.addControl( router );
 
 
 	// Geoposition button (GPS tracking)
@@ -94,7 +104,7 @@ L.Map.addInitHook(function() {
 			}
 		);
 
-		panorama.H.then(() => {
+		panorama.o.then(() => {
 			setTimeout(() => {
 
 				if(panorama.getStatus() == "ZERO_RESULTS")

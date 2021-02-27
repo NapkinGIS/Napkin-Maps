@@ -22,6 +22,7 @@
 
 
 html {
+  font-family: sans-serif;
   height: -webkit-fill-available;
 }
 
@@ -111,6 +112,7 @@ body {
 }
 
 
-.leaflet-bottom.leaflet-left {
-  /*z-index: 999;*/
+.leaflet-bottom.leaflet-left,
+.leaflet-control-geosearch {
+  z-index: 999;
 }
