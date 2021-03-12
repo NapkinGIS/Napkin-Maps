@@ -23,12 +23,12 @@
 
 html {
   font-family: sans-serif;
-  height: -webkit-fill-available;
+  height: 100vh;
+  width: 100vw;
 }
 
 body {
   min-height: 100vh;
-  min-height: -webkit-fill-available;
 
   margin: 0;
   padding: 0;
@@ -38,7 +38,6 @@ body {
 #map {
   width: 100vw;
   min-height: 100vh;
-  min-height: -webkit-fill-available;
 }
 
 
@@ -51,7 +50,6 @@ body {
 
   width: 100vw;
   min-height: 100vh;
-  min-height: -webkit-fill-available;
 
   visibility: hidden;
 }
@@ -84,7 +82,6 @@ body {
 
   width: 100vw;
   min-height: 100vh;
-  min-height: -webkit-fill-available;
 }
 
 #streetviewContainer #not_found {
@@ -96,7 +93,6 @@ body {
 
   width: 100vw;
   min-height: 100vh;
-  min-height: -webkit-fill-available;
 
   background-color: rgba(0, 0, 0, 0.8);
   text-align: center;
